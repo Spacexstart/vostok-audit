@@ -1,0 +1,7 @@
+{{- /* JS pipeline: те же шаги, что и для CSS — минификация + фингерпринт */ -}}
+{{- $main := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint -}}
+{{- $headerScroll := resources.Get "js/header-scroll.js" | resources.Minify | resources.Fingerprint -}}
+<script src="{{ $main.RelPermalink }}" defer></script>
+<script src="{{ $headerScroll.RelPermalink }}" defer></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ site.Params.map.yandexApiKey }}&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">document.addEventListener("DOMContentLoaded",function(){ymaps.ready(function(){var e=new ymaps.Map("yandex-map",{center:[{{ site.Params.map.lat }},{{ site.Params.map.lng }}],zoom:17}),t=new ymaps.Placemark([{{ site.Params.map.lat }},{{ site.Params.map.lng }}],{hintContent:'ООО "Восток-Аудит"',balloonContent:"{{ site.Params.contact.city }}, {{ site.Params.contact.address }}"});e.geoObjects.add(t),e.behaviors.disable("scrollZoom")})})</script>

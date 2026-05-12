@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{- partial "head.html" . }}
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+<a class="skip-to-content" href="#main-content">Перейти к содержимому</a>
+{{- partial "header.html" . }}
+<main id="main-content" role="main">
+  <section class="error-page" style="padding:60px 0;text-align:center">
+    <div class="container">
+      <div class="error-code" style="font-size:120px;font-weight:700;color:var(--primary-color)">404</div>
+      <h1 class="error-title" style="font-size:36px;margin-top:20px;margin-bottom:20px">Страница не найдена</h1>
+      <p class="error-message" style="font-size:18px;max-width:600px;margin:0 auto 30px">К сожалению, мы не можем найти страницу, которую вы ищете.<br>Возможно, она была удалена, переименована или никогда не существовала.</p>
+      <a href="/" class="btn btn-primary" style="font-size:18px;padding:12px 25px">Вернуться на главную</a>
+    </div>
+  </section>
+</main>
+{{- /* На странице 404 в оригинале нет футера и Яндекс-карт — оставляем как есть */ -}}
+{{- $main := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint -}}
+{{- $headerScroll := resources.Get "js/header-scroll.js" | resources.Minify | resources.Fingerprint -}}
+<script src="{{ $main.RelPermalink }}" defer></script>
+<script src="{{ $headerScroll.RelPermalink }}" defer></script>
+</body>
+</html>

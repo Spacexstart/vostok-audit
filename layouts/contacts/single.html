@@ -1,0 +1,61 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+  </div>
+</section>
+<div class="contact-page">
+  <div class="container">
+    <div class="contact-card">
+      <div class="contact-content">
+        <div class="company-info">
+          <h2><p>ООО &ldquo;Восток-Аудит&rdquo;</p></h2>
+          <div class="info-item">
+            <div class="icon"><i class="material-icons">location_on</i></div>
+            <div class="text">
+              <h3>Наш адрес</h3>
+              <p>Россия {{ site.Params.contact.city }}, {{ site.Params.contact.address }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon"><i class="material-icons">phone</i></div>
+            <div class="text">
+              <h3>Телефон</h3>
+              <p>{{ site.Params.contact.phone1 }}</p>
+              <p>{{ site.Params.contact.phoneAccounting }} (бухгалтерия)</p>
+              <p>{{ site.Params.contact.phone2 }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon"><i class="material-icons">email</i></div>
+            <div class="text">
+              <h3>E-mail</h3>
+              <p><a href="mailto:{{ site.Params.contact.email }}">{{ site.Params.contact.email }}</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon"><i class="material-icons">schedule</i></div>
+            <div class="text">
+              <h3>Режим работы</h3>
+              <table class="hours-table">
+                <tr><td>Пн-Чт</td><td>9:00-17:00</td></tr>
+                <tr><td>Пт</td><td>9:00-16:00</td></tr>
+                <tr><td>Обед</td><td>с 13:00-14:00</td></tr>
+                <tr><td>Сб-Вс</td><td>Выходные</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-map">
+        <div id="contact-yandex-map" style="width:100%;height:450px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{{- /* Локальная карта на странице контактов — со своим id, помимо общей в футере */ -}}
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ site.Params.map.yandexApiKey }}&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">document.addEventListener("DOMContentLoaded",function(){ymaps.ready(function(){var e=new ymaps.Map("contact-yandex-map",{center:[{{ site.Params.map.lat }},{{ site.Params.map.lng }}],zoom:17}),t=new ymaps.Placemark([{{ site.Params.map.lat }},{{ site.Params.map.lng }}],{hintContent:'ООО "Восток-Аудит"',balloonContent:"{{ site.Params.contact.city }}, {{ site.Params.contact.address }}"});e.geoObjects.add(t),e.behaviors.disable("scrollZoom")})})</script>
+<style>.contact-page{padding:60px 0;background-color:var(--bg-color)}.contact-card{display:flex;flex-wrap:wrap;background:var(--card-bg);border-radius:8px;box-shadow:var(--card-shadow);overflow:hidden}.contact-content{flex:1;min-width:300px;padding:40px}.contact-map{flex:1;min-width:300px;min-height:400px}.company-info h2{margin-bottom:30px;color:var(--text-color);font-size:28px;font-weight:600}.info-item{display:flex;margin-bottom:30px}.info-item .icon{margin-right:20px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;background-color:var(--secondary-color);color:var(--white);border-radius:50%;box-shadow:0 3px 5px rgba(231,76,60,.3)}.info-item .icon i{font-size:24px}.info-item .text{flex:1}.info-item .text h3{margin:0 0 8px;font-size:18px;font-weight:500;color:var(--text-color)}.info-item .text p{margin:0 0 5px;color:var(--text-color);font-size:16px}.info-item .text a{color:var(--accent-color);text-decoration:none;transition:color .3s}.info-item .text a:hover{color:var(--secondary-color)}.hours-table{width:100%;border-collapse:collapse}.hours-table td{padding:5px 10px 5px 0;color:var(--text-color)}.hours-table tr:nth-child(even){background-color:rgba(var(--bg-color-rgb),.5)}@media(max-width:768px){.contact-card{flex-direction:column}.contact-map{height:300px}}</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{{ end }}

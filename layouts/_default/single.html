@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<article class="page-content" itemscope itemtype="https://schema.org/Article">
+  <div class="container">
+    <meta itemprop="headline" content="{{ .Title }}">
+    <meta itemprop="description" content="{{ or .Description site.Params.description }}">
+    <meta itemprop="author" content="{{ site.Params.author }}">
+    <meta itemprop="datePublished" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+    <div class="content-wrapper" itemprop="articleBody">
+      {{ .Content }}
+    </div>
+  </div>
+</article>
+{{ end }}

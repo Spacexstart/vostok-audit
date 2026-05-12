@@ -1,0 +1,26 @@
+{{- /* Блок "Дополнительная информация" — карточки истории и всех годов раскрытия информации.
+       Используется на страницах истории и каждого года раскрытия. */ -}}
+<div class="about-links-section">
+  <h2>Дополнительная информация</h2>
+  <div class="material-links-grid">
+    <div class="material-link-card">
+      <div class="card-icon"><i class="material-icons">history</i></div>
+      <div class="card-content">
+        <h3>История компании</h3>
+        <p>Узнайте о развитии компании с 1991 года</p>
+        <a href="{{ "history/" | absURL }}" class="card-button">Подробнее</a>
+      </div>
+    </div>
+    {{- $disclosure := site.GetPage "/about/disclosure" -}}
+    {{- range (where $disclosure.Pages "Kind" "page").ByTitle.Reverse }}
+    <div class="material-link-card">
+      <div class="card-icon"><i class="material-icons">description</i></div>
+      <div class="card-content">
+        <h3>{{ .Title }}</h3>
+        <p>{{ or .Params.cardText .Description }}</p>
+        <a href="{{ .Permalink }}" class="card-button">Подробнее</a>
+      </div>
+    </div>
+    {{- end }}
+  </div>
+</div>

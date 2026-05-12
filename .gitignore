@@ -1,0 +1,15 @@
+# Hugo build artifacts
+/public/
+/resources/
+.hugo_build.lock
+
+# Системные/редакторские
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Опциональная папка со старой собранной версией сайта.
+# Можно удалить после того, как новая Hugo-сборка проверена и задеплоена.
+# /dist-legacy/

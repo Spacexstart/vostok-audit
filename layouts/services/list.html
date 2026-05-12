@@ -1,0 +1,45 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<section class="services-detailed">
+  <div class="container">
+    {{- range $i, $svc := .Params.servicesList }}
+    {{- /* Каждая вторая карточка — с классом "reversed" (картинка слева) */ -}}
+    <div class="service-grid-row{{ if eq (mod $i 2) 1 }} reversed{{ end }}">
+      <div class="service-grid-text">
+        <div class="service-item">
+          <div class="service-icon">
+            <i class="material-icons">{{ $svc.icon }}</i>
+          </div>
+          <div class="service-content">
+            <h2>{{ $svc.title }}</h2>
+            <p>{{ $svc.intro }}</p>
+            <ul>
+              {{- range $svc.points }}
+              <li>{{ . }}</li>
+              {{- end }}
+            </ul>
+            <div class="service-actions">
+              {{- if $svc.url }}
+              <a href="{{ $svc.url }}" class="btn btn-primary">Подробнее</a>
+              <a href="/contacts" class="btn btn-outline-primary">Заказать услугу</a>
+              {{- else }}
+              <a href="/contacts" class="btn btn-primary">Заказать услугу</a>
+              {{- end }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-grid-image">
+        <img src="{{ $svc.image | absURL }}" alt="{{ $svc.title }}">
+      </div>
+    </div>
+    {{- end }}
+  </div>
+</section>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{{ end }}

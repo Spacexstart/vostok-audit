@@ -1,0 +1,38 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<div class="modal" id="imageModal">
+  <span class="modal-close">&#215;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+<section class="reviews-section">
+  <div class="container">
+    <div class="reviews-grid">
+      {{- /* Источник данных — data/reviews.yaml */ -}}
+      {{- range site.Data.reviews }}
+      <article class="review-card">
+        <div class="review-image">
+          <img src="{{ .image | absURL }}" alt="Отзыв {{ .title }}" class="zoomable">
+        </div>
+        <div class="review-content">
+          <h2>{{ .title }}</h2>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    <div class="reviews-contact">
+      <h2>Стать нашим клиентом</h2>
+      <p>Мы всегда рады новым клиентам и готовы предложить высококачественные услуги аудита и консалтинга.</p>
+      <div class="reviews-contact-info">
+        <div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:{{ site.Params.contact.email }}">{{ site.Params.contact.email }}</a></div>
+        <div class="contact-item"><i class="fas fa-phone"></i> <a href="tel:{{ site.Params.contact.phone1tel }}">{{ site.Params.contact.phone1 }}</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("imageModal"),t=document.getElementById("modalImage"),n=document.querySelector(".modal-close"),s=document.querySelectorAll(".zoomable");s.length>0&&e&&t&&(s.forEach(n=>{n.style.cursor="pointer",n.addEventListener("click",function(n){n.preventDefault(),e.style.display="block",t.src=this.src})}),n&&n.addEventListener("click",function(){e.style.display="none"}),window.onclick=function(t){t.target==e&&(e.style.display="none")},document.addEventListener("keydown",function(t){t.key==="Escape"&&e.style.display==="block"&&(e.style.display="none")}))})</script>
+{{ end }}

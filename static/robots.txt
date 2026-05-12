@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Запрещаем индексацию административных директорий
+Disallow: /admin/
+
+# Разрешаем Яндекс.Картинки индексировать все изображения
+User-agent: Yandex-Images
+Allow: /images/
+
+# Разрешаем Googlebot индексировать все страницы
+User-agent: Googlebot
+Allow: /
+
+# Указываем sitemap
+Sitemap: https://vostok-audit.ru/sitemap.xml 

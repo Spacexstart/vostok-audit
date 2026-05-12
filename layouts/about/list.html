@@ -1,0 +1,123 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<div class="material-about-page">
+  <div class="container">
+
+    <div class="material-card company-intro">
+      <div class="card-header">
+        <i class="material-icons">business</i>
+        <h2>О компании</h2>
+      </div>
+      <div class="card-content">
+        <p class="lead-text">{{ .Params.lead }}</p>
+        <div class="features-grid">
+          {{- range .Params.features }}
+          <div class="feature-item">
+            <div class="feature-icon"><i class="material-icons">{{ .icon }}</i></div>
+            <div class="feature-text">
+              <h3>{{ .title }}</h3>
+              <p>{{ .text }}</p>
+            </div>
+          </div>
+          {{- end }}
+        </div>
+      </div>
+    </div>
+
+    <div class="main-sections">
+      {{- range .Params.mainSections }}
+      <div class="material-card section-card">
+        <div class="card-header">
+          <i class="material-icons">{{ .icon }}</i>
+          <h2>{{ .title }}</h2>
+        </div>
+        <div class="card-content">
+          {{- if eq .key "team" }}
+          <div class="team-section">
+            <p>{{ .text }}</p>
+            <div class="team-image"></div>
+          </div>
+          {{- else }}
+          <p>{{ .text }}</p>
+          {{- end }}
+        </div>
+      </div>
+      {{- end }}
+    </div>
+
+    <div class="material-card clients-section">
+      <div class="card-header">
+        <i class="material-icons">corporate_fare</i>
+        <h2>Наши клиенты</h2>
+      </div>
+      <div class="card-content">
+        <p class="clients-intro">{{ .Params.clientsIntro }}</p>
+        <div class="industries-grid">
+          {{- range .Params.industries }}
+          <div class="industry-card">
+            <div class="industry-icon"><i class="material-icons">{{ .icon }}</i></div>
+            <div class="industry-content">
+              <h3>{{ .title }}</h3>
+              <ul>
+                {{- range .companies }}
+                <li>{{ . | safeHTML }}</li>
+                {{- end }}
+              </ul>
+            </div>
+          </div>
+          {{- end }}
+        </div>
+      </div>
+    </div>
+
+    <div class="material-card partnership-section">
+      <div class="card-header">
+        <i class="material-icons">handshake</i>
+        <h2>{{ .Params.partnershipTitle }}</h2>
+      </div>
+      <div class="card-content">
+        <p>{{ .Params.partnershipIntro | safeHTML }}</p>
+        <div class="partnership-companies">
+          {{- range .Params.partnershipCompanies }}
+          <div class="partner-chip">{{ . | safeHTML }}</div>
+          {{- end }}
+        </div>
+        <p class="partnership-conclusion">{{ .Params.partnershipConclusion }}</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Дополнительная информация</h2>
+    <div class="material-links-grid">
+      {{- /* Карточка истории компании */ -}}
+      <div class="material-link-card">
+        <div class="card-icon"><i class="material-icons">history</i></div>
+        <div class="card-content">
+          <h3>История компании</h3>
+          <p>Узнайте о развитии компании с 1991 года</p>
+          <a href="{{ "history/" | absURL }}" class="material-button">Подробнее</a>
+        </div>
+      </div>
+      {{- /* Карточки годов раскрытия информации (автоматически из content/about/disclosure/*.md) */ -}}
+      {{- $disclosure := site.GetPage "/about/disclosure" -}}
+      {{- range (where $disclosure.Pages "Kind" "page").ByTitle.Reverse }}
+      <div class="material-link-card">
+        <div class="card-icon"><i class="material-icons">description</i></div>
+        <div class="card-content">
+          <h3>{{ .Title }}</h3>
+          <p>{{ or .Params.cardText .Description }}</p>
+          <a href="{{ .Permalink }}" class="material-button">Подробнее</a>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+
+  </div>
+</div>
+<style>.material-about-page{padding:60px 0;background-color:#f5f5f5;color:var(--text-color)}[data-theme=dark] .material-about-page{background-color:#121212}.material-card{background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);overflow:hidden;margin-bottom:40px}[data-theme=dark] .material-card{background:#1e1e1e;box-shadow:0 2px 10px rgba(0,0,0,.3)}.card-header{background-color:#e74c3c;color:#fff;padding:20px;display:flex;align-items:center}.card-header i{font-size:32px;margin-right:16px}.card-header h2{margin:0;font-size:24px;font-weight:500}.card-content{padding:30px}.lead-text{font-size:18px;line-height:1.6;margin-bottom:30px;color:var(--text-color)}.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px}.feature-item{display:flex;align-items:flex-start}.feature-icon{background-color:#e74c3c;color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:16px;flex-shrink:0}.feature-text h3{margin:0 0 8px;font-size:18px;font-weight:500;color:var(--text-color)}.feature-text p{margin:0;color:var(--text-color);opacity:.8}.main-sections{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-bottom:40px}.section-card{margin-bottom:0;height:100%;display:flex;flex-direction:column}.section-card .card-content{flex-grow:1}.section-card p{margin:0;line-height:1.6;color:var(--text-color)}.team-section{display:flex;flex-direction:column;gap:25px}.team-image{margin-top:10px}.team-image img{width:100%;max-width:100%;height:auto;display:block;margin:0 auto;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:transform .3s ease}[data-theme=dark] .team-image img{box-shadow:0 4px 12px rgba(0,0,0,.3)}.team-image img:hover{transform:scale(1.02)}.clients-intro{font-size:18px;margin-bottom:30px;color:var(--text-color)}.industries-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px}.industry-card{display:flex;background:rgba(231,76,60,5%);border-radius:8px;padding:20px;transition:transform .3s,box-shadow .3s}[data-theme=dark] .industry-card{background:rgba(231,76,60,.1)}.industry-card:hover{transform:translateY(-5px);box-shadow:0 8px 15px rgba(0,0,0,.1)}[data-theme=dark] .industry-card:hover{box-shadow:0 8px 15px rgba(0,0,0,.3)}.industry-icon{margin-right:16px;flex-shrink:0}.industry-icon i{font-size:40px;color:#e74c3c}.industry-content{flex:1}.industry-content h3{margin:0 0 15px;font-size:18px;font-weight:500;color:#e74c3c}.industry-content ul{margin:0;padding-left:20px;color:var(--text-color)}.industry-content li{margin-bottom:8px;line-height:1.4}.partnership-section .card-content p{line-height:1.6;color:var(--text-color)}.partnership-companies{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.partner-chip{background-color:rgba(231,76,60,.1);color:var(--text-color);padding:8px 16px;border-radius:50px;font-size:14px;font-weight:500;transition:background-color .3s}.partner-chip:hover{background-color:rgba(231,76,60,.2)}.partnership-conclusion{margin-top:20px;font-style:italic}.section-title{text-align:center;margin-bottom:30px;font-size:28px;font-weight:600;color:var(--text-color)}.material-links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px}.material-link-card{background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);overflow:hidden;transition:transform .3s ease,box-shadow .3s ease}[data-theme=dark] .material-link-card{background:#1e1e1e;box-shadow:0 2px 10px rgba(0,0,0,.3)}.material-link-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.15)}.card-icon{background-color:#e74c3c;color:#fff;display:flex;justify-content:center;align-items:center;height:120px}.card-icon i{font-size:48px}.material-link-card .card-content{padding:24px}.material-link-card h3{margin:0 0 12px;font-size:20px;font-weight:500;color:var(--text-color)}.material-link-card p{margin:0 0 20px;color:var(--text-color);opacity:.8}.material-button{display:inline-block;background-color:#e74c3c;color:#fff;padding:10px 16px;border-radius:4px;text-decoration:none;font-weight:500;transition:background-color .3s}.material-button:hover{background-color:#c0392b}@media(max-width:768px){.features-grid,.main-sections,.industries-grid,.material-links-grid{grid-template-columns:1fr}.card-content{padding:20px}.industry-card{flex-direction:column}.industry-icon{margin-right:0;margin-bottom:16px;text-align:center}}</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{{ end }}

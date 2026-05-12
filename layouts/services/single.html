@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<article class="service-content" itemscope itemtype="https://schema.org/Service">
+  <div class="container">
+    <meta itemprop="name" content="{{ .Title }}">
+    <meta itemprop="description" content="{{ or .Description .Params.subtitle }}">
+    <div class="content-wrapper" itemprop="serviceOutput">
+      {{ .Content }}
+    </div>
+    <div class="service-cta">
+      <a href="/contacts" class="btn btn-primary">Заказать консультацию</a>
+    </div>
+  </div>
+</article>
+{{ end }}

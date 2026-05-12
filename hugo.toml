@@ -1,0 +1,80 @@
+baseURL = "https://vaudit27.ru/"
+languageCode = "ru-ru"
+defaultContentLanguage = "ru"
+title = "Восток-Аудит"
+enableRobotsTXT = true
+enableEmoji = false
+
+# Папка с собранным сайтом (по умолчанию public/)
+publishDir = "public"
+
+# Дефолтные значения для sitemap (priority/changefreq для каждой страницы).
+# Можно переопределить в front matter отдельной страницы через:
+#   sitemap: { changefreq: "weekly", priority: 0.8 }
+[sitemap]
+  changefreq = "monthly"
+  priority   = 0.5
+  filename   = "sitemap.xml"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true                # Разрешаем HTML внутри markdown (используется на странице about)
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+
+[params]
+  description = "ООО «Восток-Аудит» – одна из старейших аудиторско-консалтинговых фирм Дальневосточного Федерального Округа, работающей на рынке с 1991 года."
+  keywords = "аудит,бухгалтерские услуги,консалтинг,Хабаровск"
+  author = "Восток-Аудит"
+  ogImage = "https://vaudit27.ru/images/logo.png"
+  copyrightYear = "2025"
+
+  # Контактные данные — используются в шапке/подвале/контактах. Меняйте здесь, и они подставятся везде.
+  [params.contact]
+    phone1 = "+7 (4212) 32-41-12"
+    phone1tel = "+74212324112"
+    phone2 = "+7 (4212) 77-34-98"
+    phone2tel = "+74212773498"
+    phoneAccounting = "+7 (4212) 31-28-40"
+    email = "vostok-audit@bk.ru"
+    address = "ул. Волочаевская, 153, оф. 2-А"
+    city = "г. Хабаровск"
+    postalCode = "680000"
+    whatsapp = "https://wa.me/+79145443498"
+    telegram = "https://t.me/+79145443498"
+
+  # Координаты для Яндекс.Карт (footer и страница контактов)
+  [params.map]
+    lat = 48.476551
+    lng = 135.069879
+    yandexApiKey = "ваш_API_ключ"   # ← подставьте реальный ключ Яндекс.Карт
+
+# Меню в шапке. Порядок задаётся через weight.
+[menu]
+  [[menu.main]]
+    name = "Услуги"
+    url  = "/services/"
+    weight = 10
+  [[menu.main]]
+    name = "О компании"
+    url  = "/about/"
+    weight = 20
+  [[menu.main]]
+    name = "О нас в прессе"
+    url  = "/press/"
+    weight = 30
+  [[menu.main]]
+    name = "Отзывы"
+    url  = "/reviews/"
+    weight = 40
+  [[menu.main]]
+    name = "Контакты"
+    url  = "/contacts/"
+    weight = 50
+
+# Таксономии (категории/теги) — нужны Hugo для генерации /categories/ и /tags/.
+# Сами страницы пустые, но они присутствуют в sitemap — это поведение оригинала.
+[taxonomies]
+  category = "categories"
+  tag      = "tags"

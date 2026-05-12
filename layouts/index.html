@@ -1,0 +1,72 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="hero-content-wrapper">
+    <div class="container">
+      <div class="hero-logo-container">
+        <img src="{{ "images/fulllogo.svg" | absURL }}" alt="Восток-Аудит Логотип" class="hero-logo">
+      </div>
+      <p class="hero-subtitle">{{ .Params.heroSubtitle }}</p>
+      <p>{{ .Params.heroText }}</p>
+      <div class="hero-buttons">
+        <a href="/contacts/" class="btn btn-primary btn-large">Связаться с нами</a>
+      </div>
+      <div class="hero-features">
+        {{- range .Params.heroFeatures }}
+        <div class="feature-item"><i class="fas fa-check-circle"></i> {{ . }}</div>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="container">
+    <div class="services-header">
+      <h2 class="section-title">Наши услуги</h2>
+      <a href="/services/" class="btn btn-primary services-cta">Перейти к услугам</a>
+    </div>
+    <div class="services-grid">
+      {{- range .Params.servicesPreview }}
+      <div class="service-card">
+        <i class="fas {{ .icon }}"></i>
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section class="about-preview">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>О компании</h2>
+        <p>{{ .Params.aboutPreviewText }}</p>
+        <a href="/about/" class="btn btn-outline">Узнать больше</a>
+      </div>
+      <div class="about-image">
+        <div class="image-blur-container">
+          <img src="{{ "images/photo_1_2025-05-19_13-03-09.jpg" | absURL }}" alt="Восток-Аудит команда" class="featured-image">
+          <div class="image-blur-overlay"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="advantages" style="padding-bottom:3rem">
+  <div class="container">
+    <h2 class="section-title">Почему выбирают нас</h2>
+    <div class="advantages-grid">
+      {{- range .Params.advantages }}
+      <div class="advantage-card">
+        <i class="fas {{ .icon }}"></i>
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{ end }}

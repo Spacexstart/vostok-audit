@@ -1,0 +1,37 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<section class="disclosure-list-page">
+  <div class="container">
+    <div class="material-card">
+      <div class="card-content">
+        {{ .Content }}
+      </div>
+      <div class="disclosure-years-grid">
+        {{- range (where .Pages "Kind" "page").ByTitle.Reverse }}
+        <a href="{{ .Permalink }}" class="disclosure-year-card">
+          <div class="year-card-icon"><i class="material-icons">description</i></div>
+          <div class="year-card-content">
+            <h3>{{ .Params.year | default .Title }}</h3>
+            <p>{{ .Description }}</p>
+          </div>
+        </a>
+        {{- end }}
+        <a href="{{ "history/" | absURL }}" class="disclosure-year-card">
+          <div class="year-card-icon"><i class="material-icons">history</i></div>
+          <div class="year-card-content">
+            <h3>История</h3>
+            <p>История компании с 1991 года</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>.disclosure-list-page{padding:60px 0;background-color:var(--bg-color)}.material-card{background:var(--card-bg);border-radius:8px;box-shadow:var(--card-shadow);overflow:hidden;padding:40px;margin-bottom:40px}.card-content{color:var(--text-color);margin-bottom:30px}.card-content h1{font-size:2em;margin-top:0;margin-bottom:.5em;color:var(--primary-color)}.card-content p{margin-bottom:1em;line-height:1.6}.disclosure-years-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:25px}.disclosure-year-card{background:var(--bg-color);border-radius:8px;box-shadow:var(--card-shadow);overflow:hidden;transition:all .3s ease;text-decoration:none;display:flex;flex-direction:column}.disclosure-year-card:hover{transform:translateY(-5px);box-shadow:var(--card-hover-shadow)}.year-card-icon{background-color:var(--secondary-color);color:#fff;padding:30px 0;display:flex;align-items:center;justify-content:center}.year-card-icon i{font-size:48px}.year-card-content{padding:20px}.year-card-content h3{font-size:1.5em;color:var(--primary-color);margin:0 0 10px}.year-card-content p{color:var(--text-color);margin:0}@media(max-width:768px){.disclosure-list-page{padding:30px 0}.material-card{padding:20px}.disclosure-years-grid{grid-template-columns:1fr}}</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{{ end }}

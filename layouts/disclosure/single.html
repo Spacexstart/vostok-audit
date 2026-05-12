@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<div class="disclosure-page">
+  <div class="container">
+    <div class="material-card">
+      <div class="card-content">
+        {{ .Content }}
+      </div>
+    </div>
+    {{ partial "about-links.html" . }}
+  </div>
+</div>
+{{ partial "disclosure-styles.html" . }}
+{{ end }}

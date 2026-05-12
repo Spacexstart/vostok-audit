@@ -1,0 +1,39 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </div>
+</section>
+<div class="modal" id="imageModal">
+  <span class="modal-close">&#215;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+<section class="press-section">
+  <div class="container">
+    <div class="press-grid">
+      {{- /* Источник данных — data/press.yaml */ -}}
+      {{- range site.Data.press }}
+      <article class="press-card">
+        <div class="press-image">
+          <img src="{{ .image | absURL }}" alt="{{ .title }}" class="zoomable">
+        </div>
+        <div class="press-content">
+          <div class="press-date">{{ .date }}</div>
+          <h2>{{ .title }}</h2>
+          <div class="press-source"><i class="fas fa-newspaper"></i> {{ .source }}</div>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    <div class="press-contact">
+      <h2>Для представителей СМИ</h2>
+      <p>Мы открыты к сотрудничеству со СМИ и готовы предоставить экспертные комментарии по вопросам аудита, бухгалтерского учета и налогообложения.</p>
+      <div class="press-contact-info">
+        <div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:{{ site.Params.contact.email }}">{{ site.Params.contact.email }}</a></div>
+        <div class="contact-item"><i class="fas fa-phone"></i> <a href="tel:{{ site.Params.contact.phone1tel }}">{{ site.Params.contact.phone1 }}</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

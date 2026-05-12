@@ -1,0 +1,25 @@
+{{- $currentSection := .Section -}}
+{{- $currentURL := .RelPermalink -}}
+<header class="site-header">
+  <nav class="main-nav container">
+    <div class="logo">
+      <a href="/"><img src="{{ "images/logo_red.svg" | absURL }}" alt="{{ site.Title }}"></a>
+    </div>
+    <div class="nav-links">
+      <button class="mobile-menu-close" aria-label="Закрыть меню"><i class="fas fa-times"></i></button>
+      {{- range site.Menus.main }}
+        {{- /* Подсвечиваем пункт меню только при точном совпадении URL (как в оригинале:
+              на /about/disclosure/ "О компании" НЕ подсвечивается, только на самой /about/) */ -}}
+        <a href="{{ .URL }}"{{ if eq $currentURL .URL }} class="active"{{ end }}>{{ .Name }}</a>
+      {{- end }}
+    </div>
+    <div class="nav-controls">
+      <div class="social-buttons">
+        <a href="{{ site.Params.contact.whatsapp }}" class="social-button whatsapp-button" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="{{ site.Params.contact.telegram }}" class="social-button telegram-button" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+      <button class="theme-toggle" aria-label="Переключить тему"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-button" aria-label="Меню"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+</header>
