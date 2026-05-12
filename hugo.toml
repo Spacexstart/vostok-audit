@@ -1,4 +1,4 @@
-baseURL = "https://spacexstart.github.io/vostok-audit//"
+baseURL = "https://spacexstart.github.io/vostok-audit/"
 languageCode = "ru-ru"
 defaultContentLanguage = "ru"
 title = "Восток-Аудит"
